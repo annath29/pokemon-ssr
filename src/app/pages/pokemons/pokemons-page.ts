@@ -1,6 +1,7 @@
 import { ApplicationRef, Component, inject, OnDestroy, OnInit, signal } from '@angular/core';
 import { PokemonList } from '../../pokemons/components/pokemon-list/pokemon-list';
-import { PokemonListSkeleton } from './ui/pokemon-list-skeleton/pokemon-list-skeleton';
+import { PokemonServices } from '../../pokemons/services/pokemon.services';
+import { SimplePokemon } from '../../pokemons/interfaces';
 
 @Component({
   selector: 'app-pokemons-page',
@@ -14,7 +15,11 @@ export default class PokemonsPage implements OnInit {
   //   console.log({ isStable });
   // });
 
+  private pokemonsServices = inject(PokemonServices);
+  public pokemons = signal<SimplePokemon[]>([]);
+
   ngOnInit(): void {
+    this.loadPokemons();
     // setTimeout(() => {
     //   this.isLoading.set(false);
     // }, 5000);
@@ -23,4 +28,11 @@ export default class PokemonsPage implements OnInit {
   // ngOnDestroy(): void {
   //   this.$appState.unsubscribe();
   // }
+
+  public loadPokemons(page = 0) {
+    this.pokemonsServices.loadPage(page).subscribe((pokemons) => {
+      // console.log('On init')
+      this.pokemons.set(pokemons)
+    });
+  }
 }
