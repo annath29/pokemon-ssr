@@ -24,20 +24,22 @@ export default class PokemonPage implements OnInit {
 
   // );
   ngOnInit(): void {
-    const id = this.route.snapshot.paramMap.get('id');
-    if (!id) return;
+    // const id = this.route.snapshot.paramMap.get('id');
+    // if (!id) return;
+    const name = this.route.snapshot.paramMap.get('name');
+    if (!name) return;
 
     this.pokemonServices
-      .loadPokemonById(id)
+      .loadPokemonById(name)
       .pipe(
         tap((pokemon) => {
-          const pageTitle = `Pokemon ${pokemon?.id}: ${pokemon?.name}`
-          const pageDescription = `Página del pokemon ${pokemon?.name}`
+          const pageTitle = `Pokemon ${pokemon?.id}: ${name}`
+          const pageDescription = `Página del pokemon ${name}`
           this.title.setTitle(pageTitle);
           this.meta.updateTag({ name: 'description', content: pageDescription });
           this.meta.updateTag({ name: 'og:title', content: pageTitle });
           this.meta.updateTag({ name: 'og:description', content: pageDescription });
-          this.meta.updateTag({ name: 'og:image', content: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png` });
+          this.meta.updateTag({ name: 'og:image', content: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${name}.png` });
         }),
       )
       .subscribe(this.pokemon.set);
