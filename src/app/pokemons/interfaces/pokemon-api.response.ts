@@ -1,7 +1,7 @@
 export interface PokemonApiResponse {
     count:number;
     next: string;
-    previoud: string;
+    previous: string;
     results:Result[];
 }
 

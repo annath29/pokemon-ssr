@@ -8,7 +8,10 @@ import { RouterLink } from "@angular/router";
   templateUrl: './pokemon-card.html',
 })
 export class PokemonCard {
-  public pokemon = input.required<SimplePokemon>();
+  public pokemon = input.required<SimplePokemon>();//input tiene el nombre de la property
+  // public pokemon = input.required<SimplePokemon>(
+  //  { alias: 'myPokemon'}
+  // );//alias
 
   // logEffect = effect (() => {
   //   console.log('pokemoncard:', this.pokemon())

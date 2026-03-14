@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import AboutPage from './about-page';
 
-import { AboutPage } from './about-page';
 
 describe('AboutPage', () => {
   let component: AboutPage;
@@ -19,5 +19,6 @@ describe('AboutPage', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+    
   });
 });
